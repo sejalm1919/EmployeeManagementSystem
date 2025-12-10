@@ -1,0 +1,182 @@
+API Endpoints
+
+POST
+/finance/add
+GET
+/finance/get/{employmentCode}
+
+project-controller
+POST
+/api/projects/add
+GET
+/api/projects/employee/{employeeId}
+
+employee-professional-details-controller
+POST
+/api/employee/professional/add
+GET
+/api/employee/professional/get/{employmentCode}
+
+employee-personal-details-controller
+POST
+http://localhost:8081/api/employee/personal/add
+GET
+/api/employee/personal/{employmentCode}
+
+employee-auth-controller
+POST
+/api/employee/login
+
+
+- JSON For Testing each endpoint
+
+Got it.
+Now I will give you **100% accurate JSON** for **every POST API** based ONLY on the **exact columns from your MySQL tables** — no extra fields, no missing fields.
+
+Your POST APIs:
+
+1. **POST /finance/add**
+2. **POST /api/employee/personal/add**
+3. **POST /api/employee/professional/add**
+4. **POST /api/projects/add**
+5. **POST /api/employee/login**
+
+All JSONs below match perfectly with your actual table structure.
+
+---
+
+# ✅ 1) POST /finance/add
+
+### Table: employee_finance_details
+
+(Fields: aadhar_card, bank_branch, bank_name, ctc_breakup, employment_code, ifsc_code, pan_card)
+
+```
+{
+  "employmentCode": "EMP001",
+  "panCard": "ABCDE1234F",
+  "aadharCard": "123456789012",
+  "bankName": "HDFC Bank",
+  "bankBranch": "Andheri East",
+  "ifscCode": "HDFC0001234",
+  "ctcBreakup": "Basic=30000, HRA=15000, Allowances=5000"
+}
+```
+
+---
+
+# ✅ 2) POST /api/employee/personal/add
+
+### Table: employee_personal_details
+
+(Fields: age, current_xxx, permanent_xxx, employment_code, date_of_birth, gender, etc.)
+
+```
+{
+  "employmentCode": "EMP001",
+  "fullName": "Rahul Sharma",
+  "dateOfBirth": "1995-06-15",
+  "gender": "Male",
+  "age": 29,
+
+  "currentCity": "Mumbai",
+  "currentAddressLine1": "A-23 Sunshine Apt",
+  "currentAddressLine2": "Andheri East",
+  "currentPincode": "400069",
+
+  "permanentCity": "Pune",
+  "permanentAddressLine1": "B-18 Classic Homes",
+  "permanentAddressLine2": "Wakad",
+  "permanentPincode": "411057",
+
+  "mobile": "9876543210",
+  "personalEmail": "rahul.personal@example.com",
+  "emergencyContactName": "Amit Sharma",
+  "emergencyContactMobile": "9123456789"
+}
+```
+
+---
+
+# ✅ 3) POST /api/employee/professional/add
+
+### Table: employee_professional_details
+
+(Fields: company_email, employee_password, employment_code, date_of_joining, office_xxx, hr_name, reporting_manager_xxx, employment_history)
+
+```
+{
+  "employmentCode": "EMP001",
+  "companyEmail": "rahul.sharma@company.com",
+  "employeePassword": "pass123",
+
+  "officePhone": "02244556622",
+  "city": "Mumbai",
+  "officeAddressLine1": "Tech Park Tower 3",
+  "officeAddressLine2": "MIDC Andheri",
+  "officePincode": "400093",
+
+  "reportingManagerCode": "MGR007",
+  "reportingManagerEmail": "manager@company.com",
+
+  "hrName": "Neha Sinha",
+  "employmentHistory": "Infosys(2018-2022), Wipro(2022-2024)",
+
+  "dateOfJoining": "2024-05-20"
+}
+```
+
+---
+
+# ✅ 4) POST /api/projects/add
+
+### Table: projects
+
+(Fields: title, description, status, deadline, progress)
+
+Your **entity uses ManyToMany** and expects:
+
+```
+"assignedEmployees": [ { "id": <employee_personal_details.id> } ]
+```
+
+So JSON becomes:
+
+```
+{
+  "title": "Employee Portal Development",
+  "description": "Building Employee Management System with Spring Boot",
+  "status": "In Progress",
+  "deadline": "2025-03-15",
+  "progress": 25,
+  "assignedEmployees": [
+    { "id": 1 },
+    { "id": 2 }
+  ]
+}
+```
+
+If you want no employees initially:
+
+```
+"assignedEmployees": []
+```
+
+---
+
+# ✅ 5) POST /api/employee/login
+```
+{
+  "companyEmail": "rahul.sharma@company.com",
+  "employeePassword": "pass123"
+}
+```
+
+# For Admin login
+URL : http://localhost:8081/api/admin/login
+JSON : {
+         "email": "admin@company.com",
+         "password": "admin@123"
+       }
+
+
